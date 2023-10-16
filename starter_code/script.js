@@ -4,15 +4,12 @@ const suggestions = document.querySelector('.suggestions ul');
 const fruit = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry', 'Boysenberry', 'Currant', 'Cherry', 'Coconut', 'Cranberry', 'Cucumber', 'Custard apple', 'Damson', 'Date', 'Dragonfruit', 'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Gooseberry', 'Grape', 'Raisin', 'Grapefruit', 'Guava', 'Honeyberry', 'Huckleberry', 'Jabuticaba', 'Jackfruit', 'Jambul', 'Juniper berry', 'Kiwifruit', 'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Longan', 'Lychee', 'Mango', 'Mangosteen', 'Marionberry', 'Melon', 'Cantaloupe', 'Honeydew', 'Watermelon', 'Miracle fruit', 'Mulberry', 'Nectarine', 'Nance', 'Olive', 'Orange', 'Clementine', 'Mandarine', 'Tangerine', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Plantain', 'Plum', 'Pineapple', 'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Salmonberry', 'Rambutan', 'Redcurrant', 'Salak', 'Satsuma', 'Soursop', 'Star fruit', 'Strawberry', 'Tamarillo', 'Tamarind', 'Yuzu'];
 
 function search(str) {
-	let results = [];
-
-	for (let item of fruit) {
-//check if fruit names (item) contains the characters in the string
-		if (item.toLowerCase().includes(str.toLowerCase())) {
-		results.push(item);
-	}
-}
-
+	str = str.toLowerCase();
+	//store the array of matching fruit names to the results variable and filter the fruit array
+	const results = fruit.filter(item => {
+	//check if the the item contains the string
+		return item.toLowerCase().includes(str);
+	})
 	return results;
 }
 
@@ -50,16 +47,19 @@ function useSuggestion(e) {
 	}
 }
 
-// function highlight(e) {
-// 	if (e.target.tagName === 'LI') {
-// 		e.target.style.backgroundColor = '#f0f0f0'
-// 	}
-// }
-// function unhighlight(e) {
-// 	if (e.target.name === 'LI') {
-// 		e.target.style.backgroundColor = '';
-// 	}
-// }
+function highlight(e) {
+	if (e.target.tagName === 'LI') {
+		e.target.style.backgroundColor = '#fc5203'
+		e.target.style.fontWeight = 'bold';
+	}
+}
+function unhighlight(e) {
+	if (e.target.tagName === 'LI') {
+		e.target.style.backgroundColor = '';
+		e.target.style.fontWeight = 'normal';
+	}
+}
+
 
 function clearSuggestions() {
 	suggestions.innerHTML = '';
@@ -75,8 +75,8 @@ function clickOutsideHandler(e) {
 
 document.addEventListener('click', clickOutsideHandler);
 
-// suggestions.addEventListener('mouseover', highlight);
-// suggestions.addEventListener('mouseout', unhighlight);
+suggestions.addEventListener('mouseover', highlight);
+suggestions.addEventListener('mouseout', unhighlight);
 
 input.addEventListener('keyup', searchHandler);
 suggestions.addEventListener('click', useSuggestion);
