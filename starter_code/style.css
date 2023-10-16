@@ -62,10 +62,6 @@ ul li {
   padding: 10px 10px;
   background-color: rgb(255, 255, 255, 0.1);
 }
-ul li:hover {
-  background-color: rgb(253, 72, 0);
-  font-weight: 600;
-}
 
 input {
    /* TODO */
